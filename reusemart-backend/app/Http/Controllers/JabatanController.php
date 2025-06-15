@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\jabatan;
+use App\Models\Jabatan;
 use Illuminate\Http\Request;
 
 class JabatanController
@@ -28,7 +28,8 @@ class JabatanController
      */
     public function show(jabatan $jabatan)
     {
-        //
+        $jabatan = Jabatan::all();
+        return response()->json($jabatan, 200);
     }
 
     /**

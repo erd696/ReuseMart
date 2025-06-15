@@ -1,0 +1,57 @@
+.foto-container-penitip {
+    border: 1px solid #B7B7B7;
+    border-radius: 5px;
+    width: 300px;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.foto-container-penitip img {
+    max-width: 250px;
+    max-height: 250px;
+    border-radius: 5px;
+    display: block;
+    margin: auto; 
+}
+
+@media (max-width: 768px) {
+    .foto-container {
+        border: 1px solid #B7B7B7;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+    .foto-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .foto-container {
+        border: 1px solid #B7B7B7;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+    .foto-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        display: block;
+        margin: 0 auto;
+    }
+}

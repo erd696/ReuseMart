@@ -1,21 +1,38 @@
 import { useNavigate, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-/* eslint-disable react/prop-types */
-const ProtectedRoutes = ({ children }) => {
-    const navigate = useNavigate();
-    const [token, setToken] = useState("");
+const ProtectedRoutes = ({ children, allowedRoles }) => {
+  const navigate = useNavigate();
+  const [isAllowed, setIsAllowed] = useState(false);
 
-    useEffect(() => {
-        const tokenDariSS = sessionStorage.getItem("token");
-        setToken(tokenDariSS);
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    const role = sessionStorage.getItem("role");
 
-        if (!tokenDariSS) {
-            navigate("/");
-        }
-    }, [navigate]);
+    if (!token) {
+      navigate("/auth/login");
+    } else if (!allowedRoles.includes(role)) {
+      if (role === "pembeli") {
+        navigate("/pembeli/home");
+      } else if (role === "penitip") {
+        navigate("/penitip/profile");
+      } else if (role === "owner") {
+        navigate("/owner/req-donasi");
+      } else if (role === "admin") {
+        navigate("/admin/admin-organisasi-master");
+      } else if (role === "gudang") {
+        navigate("/pegawai-gudang/penitipan-barang");
+      } else if (role === "cs") {
+        navigate("/customerservice/penitip-management");
+      } else if (role === "organisasi") {
+        navigate("/organisasi/request-donasi");
+      }
+    } else {
+      setIsAllowed(true);
+    }
+  }, [navigate, allowedRoles]);
 
-    return token && (children ? children : <Outlet />);
+  return isAllowed ? children : null;
 };
 
 export default ProtectedRoutes;

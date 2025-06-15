@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\merchandise;
+use App\Models\Merchandise;
 use Illuminate\Http\Request;
 
 class MerchandiseController
@@ -12,7 +12,7 @@ class MerchandiseController
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -26,11 +26,23 @@ class MerchandiseController
     /**
      * Display the specified resource.
      */
-    public function show(merchandise $merchandise)
+    public function showAll()
     {
-        //
+        try {
+            $merchandises = Merchandise::all();
+            if ($merchandises->isEmpty()) {
+                return response()->json([
+                    'message' => 'No merchandise found',
+                ], 404);
+            }
+            return response()->json($merchandises, 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error retrieving merchandise',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
-
     /**
      * Update the specified resource in storage.
      */

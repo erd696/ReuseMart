@@ -2,6 +2,7 @@
     font-size: 25px;
     text-align: center;
     margin-top: 5px;
+    margin-bottom: 0!important;
 }
 
 .alamat-container {
@@ -136,6 +137,10 @@
     border-radius: 10px;
     padding: 5px 10px;
     background-color: #fff;
+}
+
+.search-bar:focus-within {
+    border: 1px solid black;
 }
 
 .search-icon-inside {

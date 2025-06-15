@@ -1,0 +1,77 @@
+.onsale-penitipan-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: #fefefe;
+}
+
+.onsale-products-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.onsale-products-content-container {
+    flex: 1;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.onsale-products-container h2 {
+    margin-bottom: 15px;
+}
+
+.search-bar-onsale {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+}
+
+.search-bar-onsale input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    flex: 1;
+}
+
+.onsale-products-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.onsale-products-table th,
+.onsale-products-table td {
+    border-top: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.onsale-products-table tr{
+    cursor: pointer;
+}
+
+.onsale-products-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.onsale-products-table th {
+    background-color: #f5f5f5;
+}
+
+.product-info-onsale {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-info-onsale img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}

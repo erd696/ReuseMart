@@ -3,19 +3,22 @@ import "./ProfilePembeliPage.css";
 import FotoPembeli from "../../Components/Pembeli/FotoPembeli";
 import ProfileNavigation from "../../Components/Pembeli/ProfileHeader";
 import InputColumn from "../../Components/InputColumn";
-import profileImage from "../../assets/images/Pembeli/Yuki.jpeg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { GetProfile } from "../../api/apiPembeli";
+import { getThumbnailPembeli } from "../../api/index";
 
-const Poin = () => {
+
+const Poin = (profile) => {
   return (
     <Container className="poin-container">
       <b>Poin Loyalitas</b>
-      <p>119 Poin</p>
+      <p>{profile = profile.poin_loyalitas} Poin</p>
     </Container>
   );
 };
 
-const InputDataPembeli = () => {
+const InputDataPembeli = ({ profile }) => {
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -34,6 +37,7 @@ const InputDataPembeli = () => {
     console.log(formData);
   };
 
+
   return (
     <Container className="input-container">
       <form onSubmit={handleSubmit}>
@@ -42,7 +46,7 @@ const InputDataPembeli = () => {
           contentLabel="Nama Lengkap"
           typeInput="text"
           idInput="name"
-          placeholderInput="Yuki Suou"
+          placeholderInput={profile.nama_pembeli}
           value={formData.fullName}
           onChange={handleChange}
         />
@@ -51,7 +55,7 @@ const InputDataPembeli = () => {
           contentLabel="Email"
           typeInput="email"
           idInput="email"
-          placeholderInput="yukisuou@gmail.com"
+          placeholderInput={profile.email_pembeli}
           value={formData.email}
           onChange={handleChange}
         />
@@ -60,7 +64,7 @@ const InputDataPembeli = () => {
           contentLabel="Nomor Telepon"
           typeInput="number"
           idInput="phone"
-          placeholderInput="1234567890"
+          placeholderInput={profile.nomor_telepon_pembeli}
           value={formData.phone}
           onChange={handleChange}
         />
@@ -69,42 +73,55 @@ const InputDataPembeli = () => {
           contentLabel="Tanggal Lahir"
           typeInput="date"
           idInput="dateBirth"
-          placeholderInput=""
+          placeholderInput={profile.tanggal_lahir}
           value={formData.dateBirth}
           onChange={handleChange}
         />
-        <InputColumn
-          nameLabel="address"
-          contentLabel="Alamat"
-          typeInput="text"
-          idInput="address"
-          placeholderInput="Jl. Putangina No. 69"
-          value={formData.address}
-          onChange={handleChange}
-        />
-        <button type="submit" className="input-button"><b>Simpan</b></button>
+        {/* <button type="submit" className="input-button"><b>Simpan</b></button> */}
       </form>
     </Container>
   );
 };
 
 const ProfilePembeli = () => {
+  const [profile, setProfile] = useState({});
+
+  useEffect(() => {
+    const showProfile = async () => {
+      try {
+        const data = await GetProfile();
+        console.log('test', data);
+        setProfile(data);
+      } catch (error) {
+        console.error("Error fetching profile", error);
+      }
+    }
+
+    showProfile();
+  }, []);
+
+
   return (
     <Container className="pembeli-container">
       <ProfileNavigation Profile={{ fontWeight: "600", textDecoration: "underline", fontSize: "40px", color: "black" }} Alamat={{ fontWeight: "50", fontSize: "35px", color: "#AFAEAE" }} />
       <div className="profile-content">
         <div className="profile-left">
-          <FotoPembeli 
-            Foto={profileImage} 
-            SubProp={
-              <>
-                <label htmlFor="upload" className="button-profile">Pilih Gambar</label>
-              </>
-            } 
-          />
-          <Poin />
+          {profile.foto_pembeli && (
+            <FotoPembeli
+              Foto={getThumbnailPembeli(profile.foto_pembeli)}
+              SubProp={
+                <>
+                  {/* <label htmlFor="upload" className="button-profile">Pilih Gambar</label> */}
+                </>
+              }
+            />
+          )}
+          <Container className="poin-container">
+            <b>Poin Loyalitas</b>
+            <p>{profile.poin_loyalitas} Poin</p>
+          </Container>
         </div>
-        <InputDataPembeli />
+        <InputDataPembeli profile={profile} />
       </div>
     </Container>
   );

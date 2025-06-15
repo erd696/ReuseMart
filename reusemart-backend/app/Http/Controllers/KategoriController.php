@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kategori;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class KategoriController
@@ -13,6 +13,21 @@ class KategoriController
     public function index()
     {
         //
+    }
+
+    public function searchByName($nama_kategori)
+    {
+        $kategori = Kategori::where('nama_kategori', 'like', '%' . $nama_kategori . '%')
+        ->whereRaw('id_kategori % 10 != 0')
+        ->get();
+        if ($kategori->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Kategori not found',
+            ], 404);
+        }
+
+        return response()->json($kategori);
     }
 
     /**

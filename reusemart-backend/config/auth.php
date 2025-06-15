@@ -36,11 +36,48 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+        'pegawai' => [
+            'driver' => 'sanctum',
+            'provider' => 'pegawai',
+        ],
+        'cs' => [
+            'driver' => 'sanctum',
+            'provider' => 'pegawai',
+        ],
+        'admin' => [
+            'driver' => 'sanctum',
+            'provider' => 'pegawai',
+        ],
+        'gudang' => [
+            'driver' => 'sanctum',
+            'provider' => 'pegawai',
+        ],
+        'pembeli' => [
+            'driver' => 'sanctum',
+            'provider' => 'pembeli',
+        ],
+        'penitip' => [
+            'driver' => 'sanctum',
+            'provider' => 'penitip',
+        ],
+        'hunter' => [
+            'driver' => 'sanctum',
+            'provider' => 'hunter',
+        ],
+        'organisasi' => [
+            'driver' => 'sanctum',
+            'provider' => 'organisasi',
+        ],
+        'owner' => [
+            'driver' => 'sanctum',
+            'provider' => 'pegawai',
+        ],
+        'kurir' => [
+            'driver' => 'sanctum',
+            'provider' => 'pegawai',
         ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -60,15 +97,26 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'pegawai' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\Pegawai::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'pembeli' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pembeli::class,
+        ],
+        'penitip' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Penitip::class,
+        ],
+        'hunter' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Hunter::class,
+        ],
+        'organisasi' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Organisasi::class,
+        ],
     ],
 
     /*

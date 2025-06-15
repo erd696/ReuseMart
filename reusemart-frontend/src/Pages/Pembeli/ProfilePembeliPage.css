@@ -10,6 +10,13 @@
     align-items: start;
 }
 
+.poin-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+
 .input-file {
     display: none;
 }
@@ -35,11 +42,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* height: 12vh; */
 }
 
 .input-container {
     flex: 1;
-    max-width: 400px;
+    max-width: 500px;
     border: 1px solid #B7B7B7;
     border-radius: 5px;
     padding: 20px;
